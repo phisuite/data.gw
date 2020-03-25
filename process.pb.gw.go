@@ -84,124 +84,17 @@ func request_ProcessAPI_Execute_0(ctx context.Context, marshaler runtime.Marshal
 }
 
 var (
-	filter_ProcessAPI_Record_0 = &utilities.DoubleArray{Encoding: map[string]int{"definition": 0, "name": 1, "version": 2}, Base: []int{1, 1, 2, 3, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 3, 4}}
+	filter_ProcessReadAPI_List_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_ProcessAPI_Record_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq Process
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Definition); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["name"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
-	}
-
-	protoReq.Name, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
-	}
-
-	val, ok = pathParams["version"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "version")
-	}
-
-	protoReq.Version, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "version", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessAPI_Record_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	msg, err := client.Record(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_ProcessAPI_Record_0(ctx context.Context, marshaler runtime.Marshaler, server ProcessAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq Process
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Definition); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["name"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
-	}
-
-	protoReq.Name, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
-	}
-
-	val, ok = pathParams["version"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "version")
-	}
-
-	protoReq.Version, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "version", err)
-	}
-
-	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ProcessAPI_Record_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	msg, err := server.Record(ctx, &protoReq)
-	return msg, metadata, err
-
-}
-
-var (
-	filter_ProcessAPI_List_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
-func request_ProcessAPI_List_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessAPIClient, req *http.Request, pathParams map[string]string) (ProcessAPI_ListClient, runtime.ServerMetadata, error) {
+func request_ProcessReadAPI_List_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessReadAPIClient, req *http.Request, pathParams map[string]string) (ProcessReadAPI_ListClient, runtime.ServerMetadata, error) {
 	var protoReq Options
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessAPI_List_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessReadAPI_List_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -219,17 +112,17 @@ func request_ProcessAPI_List_0(ctx context.Context, marshaler runtime.Marshaler,
 }
 
 var (
-	filter_ProcessAPI_Success_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_ProcessReadAPI_Success_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_ProcessAPI_Success_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessAPIClient, req *http.Request, pathParams map[string]string) (ProcessAPI_SuccessClient, runtime.ServerMetadata, error) {
+func request_ProcessReadAPI_Success_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessReadAPIClient, req *http.Request, pathParams map[string]string) (ProcessReadAPI_SuccessClient, runtime.ServerMetadata, error) {
 	var protoReq Options
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessAPI_Success_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessReadAPI_Success_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -247,17 +140,17 @@ func request_ProcessAPI_Success_0(ctx context.Context, marshaler runtime.Marshal
 }
 
 var (
-	filter_ProcessAPI_Failure_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_ProcessReadAPI_Failure_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_ProcessAPI_Failure_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessAPIClient, req *http.Request, pathParams map[string]string) (ProcessAPI_FailureClient, runtime.ServerMetadata, error) {
+func request_ProcessReadAPI_Failure_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessReadAPIClient, req *http.Request, pathParams map[string]string) (ProcessReadAPI_FailureClient, runtime.ServerMetadata, error) {
 	var protoReq Options
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessAPI_Failure_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessReadAPI_Failure_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -274,6 +167,109 @@ func request_ProcessAPI_Failure_0(ctx context.Context, marshaler runtime.Marshal
 
 }
 
+var (
+	filter_ProcessReadAPI_Get_0 = &utilities.DoubleArray{Encoding: map[string]int{"id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+)
+
+func request_ProcessReadAPI_Get_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessReadAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq Options
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ProcessReadAPI_Get_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.Get(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_ProcessReadAPI_Get_0(ctx context.Context, marshaler runtime.Marshaler, server ProcessReadAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq Options
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ProcessReadAPI_Get_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.Get(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_ProcessWriteAPI_Record_0(ctx context.Context, marshaler runtime.Marshaler, client ProcessWriteAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq Process
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.Record(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_ProcessWriteAPI_Record_0(ctx context.Context, marshaler runtime.Marshaler, server ProcessWriteAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq Process
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.Record(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 // RegisterProcessAPIHandlerServer registers the http handlers for service ProcessAPI to "mux".
 // UnaryRPC     :call ProcessAPIServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -286,7 +282,36 @@ func RegisterProcessAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 		return
 	})
 
-	mux.Handle("POST", pattern_ProcessAPI_Record_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	return nil
+}
+
+// RegisterProcessReadAPIHandlerServer registers the http handlers for service ProcessReadAPI to "mux".
+// UnaryRPC     :call ProcessReadAPIServer directly.
+// StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
+func RegisterProcessReadAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ProcessReadAPIServer) error {
+
+	mux.Handle("GET", pattern_ProcessReadAPI_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_ProcessReadAPI_Success_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_ProcessReadAPI_Failure_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_ProcessReadAPI_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -295,36 +320,43 @@ func RegisterProcessAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ProcessAPI_Record_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ProcessReadAPI_Get_0(rctx, inboundMarshaler, server, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ProcessAPI_Record_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ProcessReadAPI_Get_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ProcessAPI_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
-		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-		return
-	})
+	return nil
+}
 
-	mux.Handle("GET", pattern_ProcessAPI_Success_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
-		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-		return
-	})
+// RegisterProcessWriteAPIHandlerServer registers the http handlers for service ProcessWriteAPI to "mux".
+// UnaryRPC     :call ProcessWriteAPIServer directly.
+// StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
+func RegisterProcessWriteAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ProcessWriteAPIServer) error {
 
-	mux.Handle("GET", pattern_ProcessAPI_Failure_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
-		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-		return
+	mux.Handle("POST", pattern_ProcessWriteAPI_Record_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_ProcessWriteAPI_Record_0(rctx, inboundMarshaler, server, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_ProcessWriteAPI_Record_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
 
 	return nil
@@ -388,7 +420,56 @@ func RegisterProcessAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 
 	})
 
-	mux.Handle("POST", pattern_ProcessAPI_Record_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	return nil
+}
+
+var (
+	pattern_ProcessAPI_Execute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"process", "v0", "execute"}, "", runtime.AssumeColonVerbOpt(true)))
+)
+
+var (
+	forward_ProcessAPI_Execute_0 = runtime.ForwardResponseStream
+)
+
+// RegisterProcessReadAPIHandlerFromEndpoint is same as RegisterProcessReadAPIHandler but
+// automatically dials to "endpoint" and closes the connection when "ctx" gets done.
+func RegisterProcessReadAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+	conn, err := grpc.Dial(endpoint, opts...)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+			return
+		}
+		go func() {
+			<-ctx.Done()
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+		}()
+	}()
+
+	return RegisterProcessReadAPIHandler(ctx, mux, conn)
+}
+
+// RegisterProcessReadAPIHandler registers the http handlers for service ProcessReadAPI to "mux".
+// The handlers forward requests to the grpc endpoint over "conn".
+func RegisterProcessReadAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterProcessReadAPIHandlerClient(ctx, mux, NewProcessReadAPIClient(conn))
+}
+
+// RegisterProcessReadAPIHandlerClient registers the http handlers for service ProcessReadAPI
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ProcessReadAPIClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ProcessReadAPIClient"
+// doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
+// "ProcessReadAPIClient" to call the correct interceptors.
+func RegisterProcessReadAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ProcessReadAPIClient) error {
+
+	mux.Handle("GET", pattern_ProcessReadAPI_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -397,18 +478,18 @@ func RegisterProcessAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ProcessAPI_Record_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ProcessReadAPI_List_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ProcessAPI_Record_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ProcessReadAPI_List_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ProcessAPI_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ProcessReadAPI_Success_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -417,18 +498,18 @@ func RegisterProcessAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ProcessAPI_List_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ProcessReadAPI_Success_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ProcessAPI_List_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_ProcessReadAPI_Success_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ProcessAPI_Success_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ProcessReadAPI_Failure_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -437,18 +518,18 @@ func RegisterProcessAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ProcessAPI_Success_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ProcessReadAPI_Failure_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ProcessAPI_Success_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_ProcessReadAPI_Failure_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ProcessAPI_Failure_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ProcessReadAPI_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -457,14 +538,14 @@ func RegisterProcessAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ProcessAPI_Failure_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ProcessReadAPI_Get_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ProcessAPI_Failure_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_ProcessReadAPI_Get_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -472,25 +553,90 @@ func RegisterProcessAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 }
 
 var (
-	pattern_ProcessAPI_Execute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v0", "processes"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ProcessReadAPI_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"process", "v0", "inspect"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ProcessAPI_Record_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v0", "processes", "name", "version"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ProcessReadAPI_Success_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"process", "v0", "inspect", "success"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ProcessAPI_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v0", "processes"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ProcessReadAPI_Failure_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"process", "v0", "inspect", "failure"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ProcessAPI_Success_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v0", "processes", "successes"}, "", runtime.AssumeColonVerbOpt(true)))
-
-	pattern_ProcessAPI_Failure_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v0", "processes", "failures"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ProcessReadAPI_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"process", "v0", "inspect", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
-	forward_ProcessAPI_Execute_0 = runtime.ForwardResponseStream
+	forward_ProcessReadAPI_List_0 = runtime.ForwardResponseStream
 
-	forward_ProcessAPI_Record_0 = runtime.ForwardResponseMessage
+	forward_ProcessReadAPI_Success_0 = runtime.ForwardResponseStream
 
-	forward_ProcessAPI_List_0 = runtime.ForwardResponseStream
+	forward_ProcessReadAPI_Failure_0 = runtime.ForwardResponseStream
 
-	forward_ProcessAPI_Success_0 = runtime.ForwardResponseStream
+	forward_ProcessReadAPI_Get_0 = runtime.ForwardResponseMessage
+)
 
-	forward_ProcessAPI_Failure_0 = runtime.ForwardResponseStream
+// RegisterProcessWriteAPIHandlerFromEndpoint is same as RegisterProcessWriteAPIHandler but
+// automatically dials to "endpoint" and closes the connection when "ctx" gets done.
+func RegisterProcessWriteAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+	conn, err := grpc.Dial(endpoint, opts...)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+			return
+		}
+		go func() {
+			<-ctx.Done()
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+		}()
+	}()
+
+	return RegisterProcessWriteAPIHandler(ctx, mux, conn)
+}
+
+// RegisterProcessWriteAPIHandler registers the http handlers for service ProcessWriteAPI to "mux".
+// The handlers forward requests to the grpc endpoint over "conn".
+func RegisterProcessWriteAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterProcessWriteAPIHandlerClient(ctx, mux, NewProcessWriteAPIClient(conn))
+}
+
+// RegisterProcessWriteAPIHandlerClient registers the http handlers for service ProcessWriteAPI
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ProcessWriteAPIClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ProcessWriteAPIClient"
+// doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
+// "ProcessWriteAPIClient" to call the correct interceptors.
+func RegisterProcessWriteAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ProcessWriteAPIClient) error {
+
+	mux.Handle("POST", pattern_ProcessWriteAPI_Record_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_ProcessWriteAPI_Record_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_ProcessWriteAPI_Record_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	return nil
+}
+
+var (
+	pattern_ProcessWriteAPI_Record_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"process", "v0", "record"}, "", runtime.AssumeColonVerbOpt(true)))
+)
+
+var (
+	forward_ProcessWriteAPI_Record_0 = runtime.ForwardResponseMessage
 )

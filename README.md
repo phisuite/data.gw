@@ -34,4 +34,3 @@ For more details, see [grpc-gateway][10].
 [1]: https://github.com/phisuite
 [2]: https://github.com/phisuite/data
 [10]: https://grpc-ecosystem.github.io/grpc-gateway
-__
